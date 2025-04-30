@@ -1,0 +1,16 @@
+{% include "partials/head.html" %}
+
+<body>
+    {% include "partials/header.html" %}
+    <main class="main-content-container">
+        <div class="main-content main-content-list container">
+            <article class="item-card">
+                {% for empresas in empresa %}
+                    {{empresas.nome}}
+                {% endfor %}
+              </article>
+        </div>
+    </main>
+</body>
+{% include "partials/footer.html" %}
+</html>
