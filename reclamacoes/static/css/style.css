@@ -99,6 +99,14 @@
   }
   
   .item-card {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
     background: white;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -120,7 +128,7 @@
   .item-content {
     padding: 2rem;
   }
-  
+
   .item-meta {
     display: flex;
     flex-wrap: wrap;
@@ -176,6 +184,7 @@
   .btn-primary {
     background: var(--color2);
     color: white;
+    margin-top: auto; 
   }
   
   .btn-primary:hover {
@@ -255,3 +264,127 @@
     background: var(--color3);
     transition: width 0.5s ease;
   }
+  /* Estilos para a lista de reclamações */
+.lista-reclamacoes {
+  padding: 4rem 0;
+}
+
+.titulo-pagina {
+  color: var(--color5);
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 3rem;
+}
+
+.reclamacoes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.reclamacao-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.reclamacao-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.cabecalho-reclamacao {
+  margin-bottom: 1.5rem;
+}
+
+.titulo-reclamacao {
+  color: var(--color4);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  color: var(--color3);
+}
+
+.meta-info i {
+  margin-right: 0.5rem;
+}
+
+.preview-descricao {
+  flex-grow: 1;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.rodape-reclamacao {
+  text-align: right;
+}
+
+.nenhuma-reclamacao {
+  text-align: center;
+  padding: 4rem;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .reclamacoes-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .meta-info {
+      flex-direction: column;
+      gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo-pagina {
+      font-size: 2.4rem;
+  }
+  
+  .reclamacao-card {
+      padding: 1.5rem;
+  }
+}
+.formulario {
+  background: white;
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 4rem;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+  color: var(--color4);
+}
+
+.form-input {
+  width: 100%;
+  padding: 1.2rem;
+  border: 1px solid var(--color3);
+  border-radius: var(--border-radius);
+  font-size: 1.6rem;
+}
+
+.form-actions {
+  text-align: right;
+  margin-top: 2rem;
+}

@@ -1,0 +1,31 @@
+{% include "partials/head.html" %}
+
+<form action="{% url "criar_reclamacao" empresa.id %}" method="post" class="formulario container">
+    {% csrf_token %}
+    
+    <h2>Reclamar sobre: {{ empresa.nome }}</h2>
+
+    <div class="form-group">
+        <label for="titulo" class="form-label">Título da Reclamação</label>
+        <input type="text" 
+               name="titulo" 
+               id="titulo" 
+               class="form-input" 
+               placeholder="Título da Reclamação" 
+               required>
+    </div>
+
+    <div class="form-group">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea name="descricao" 
+                  id="descricao" 
+                  class="form-input" 
+                  placeholder="Descreva sua reclamação" 
+                  rows="5" 
+                  required></textarea>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Enviar Reclamação</button>
+    </div>
+</form>

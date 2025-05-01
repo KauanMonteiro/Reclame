@@ -8,7 +8,7 @@ def home(request):
 
 def ver_mais_empresa(request,empresa_id):
     empresa = get_object_or_404(Empresa,pk=empresa_id)
-    reclamacoes = Reclamacao.objects.filter(empresa=empresa)
+    reclamacoes = Reclamacao.objects.filter(empresa=empresa).order_by('-criado_em')
     return render(request, 'pages/ver_mais_empresa.html', {'empresa': empresa,'reclamacoes': reclamacoes})
 
 def cadastrar_empresa(request):
