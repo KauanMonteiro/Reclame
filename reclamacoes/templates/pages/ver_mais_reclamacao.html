@@ -1,0 +1,35 @@
+{% include "partials/head.html" %}
+<body>
+    {% include "partials/header.html" %}
+    <main class="main-content-container">
+        <div class="container detalhe-reclamacao">
+            <div class="detalhe-reclamacao-card">
+                <div class="cabecalho-reclamacao">
+                    <h1 class="titulo-reclamacao">{{ reclamacao.titulo }}</h1>
+                    <div class="meta-info">
+                        <span class="usuario">
+                            <i class="fas fa-user"></i>
+                            {{ reclamacao.usuario.username }}
+                        </span>
+                        <span class="data">
+                            <i class="fas fa-calendar-alt"></i>
+                            {{ reclamacao.criado_em|date:"d/m/Y H:i" }}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="descricao-completa">
+                    {{ reclamacao.descricao|linebreaksbr }}
+                </div>
+                
+                <div class="acoes-reclamacao">
+                    <a href="/" class="btn btn-voltar">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+{% include "partials/footer.html" %}
+</html>

@@ -1,0 +1,25 @@
+<div class="reclamacao-card">
+    <div class="cabecalho-reclamacao">
+        <h3 class="titulo-reclamacao">{{ reclamacao.titulo|truncatechars:25}}</h3>
+        <div class="meta-info">
+            <span class="usuario">
+                <i class="fas fa-user"></i>
+                {{ reclamacao.usuario.username }}
+            </span>
+            <span class="data">
+                <i class="fas fa-calendar-alt"></i>
+                {{ reclamacao.criado_em|date:"d/m/Y H:i" }}
+            </span>
+        </div>
+    </div>
+    
+    <div class="preview-descricao">
+        {{ reclamacao.descricao|truncatechars:25 }}
+    </div>
+    
+    <div class="rodape-reclamacao">
+        <a href="{% url "ver_mais_reclamacao" reclamacao.id %}" class="btn btn-primary">
+            Ver Completo
+        </a>
+    </div>
+</div>

@@ -21,7 +21,9 @@ def cadastrar_empresa(request):
         return redirect('home')
     return render(request,'pages/cadastro_empresa.html')
 
-
+def ver_mais_reclamacao(request,reclamacao_id):
+    reclamacao = get_object_or_404(Reclamacao,pk=reclamacao_id)
+    return render(request,'pages/ver_mais_reclamacao.html',{'reclamacao':reclamacao})
 
 def criar_reclamacao(request, empresa_id):
     empresa = get_object_or_404(Empresa, pk=empresa_id)
@@ -39,3 +41,6 @@ def criar_reclamacao(request, empresa_id):
         return redirect('home')
 
     return render(request, 'pages/criar_reclamacao.html', {'empresa': empresa})
+
+def area_admin(request):
+    pass
