@@ -1,0 +1,30 @@
+{% include "partials/head.html" %}
+
+<div class="formulario">
+    <form  method="POST">
+        {% csrf_token %}
+        
+        <div class="form-header">
+            <h1>Denunciar</h1>
+        </div>
+        
+        <div class="form-group">
+            <label for="motivo" class="form-label">Motivo da Denúncia</label>
+            <select name="motivo" id="motivo" class="form-input">
+                <option value="SPAM">SPAM</option>
+                <option value="OFENSIVO">OFENSIVO</option>
+                <option value="FALSO">FALSO</option>
+                <option value="OUTRO">Outro motivo</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="comentario" class="form-label">Comentário (opcional)</label>
+            <textarea name="comentario" id="comentario" class="form-input" placeholder="Descreva o motivo da denúncia, se desejar."></textarea>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+</div>

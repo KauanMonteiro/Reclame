@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Empresa,Reclamacao
+from .models import Empresa,Reclamacao,Denuncia
 
 def home(request):
     empresa = Empresa.objects.all()
@@ -44,3 +44,21 @@ def criar_reclamacao(request, empresa_id):
 
 def area_admin(request):
     pass
+
+def denunciar(request,reclamacao_id):
+    reclamacao = get_object_or_404(Reclamacao,pk=reclamacao_id)
+
+    if request.method == "POST":
+         motivo = request.POST.get('motivo')
+         comentario= request.POST.get('comentario')
+         Denuncia.objects.create(
+             usuario = request.user,
+             reclamacao = reclamacao,
+             motivo = motivo,
+             comentario = comentario,
+         )
+         reclamacao.denuncias_count += 1
+         reclamacao.save()
+         return redirect(home)
+
+    return render(request,'pages/denunciar.html')

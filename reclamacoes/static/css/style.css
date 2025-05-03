@@ -513,3 +513,30 @@
     font-size: 2rem;
   }
 }
+.btn-alert {
+  background-color: transparent;
+  color: var(--color5);
+  border: none;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-alert i {
+  font-size: 2rem;
+}
+
+
+.btn-alert:hover {
+  background-color: transparent;
+  transform: scale(1.09);
+}
+
+.btn-alert:focus {
+  outline: 2px solid var(--color3);
+  outline-offset: 4px;
+}
