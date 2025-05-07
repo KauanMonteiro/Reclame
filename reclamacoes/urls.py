@@ -10,5 +10,8 @@ urlpatterns = [
     path('vermais/reclamacao/<int:reclamacao_id>/',views.ver_mais_reclamacao,name='ver_mais_reclamacao'),
     path('area_admin/',views.area_admin,name='area_admin'),
     path('denunciar/<int:reclamacao_id>/',views.denunciar,name="denunciar"),
-    
+    path('bloquear/<int:reclamacao_id>/',views.bloquear,name='bloquear'),
+    path('desbloquear/<int:reclamacao_id>/',views.desbloquear,name='desbloquear'),
+    path('aprovar/<int:empresa_id>/', views.aprovar, name='aprovar'),
+    path('rejeitar/<int:empresa_id>/', views.rejeitar, name='rejeitar'),
 ]

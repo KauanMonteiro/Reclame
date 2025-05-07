@@ -1,4 +1,3 @@
-from kivy.uix.behaviors.cover import Decimal
 from django.contrib import admin
 from .models import Empresa,Reclamacao,Denuncia
 

@@ -540,3 +540,117 @@
   outline: 2px solid var(--color3);
   outline-offset: 4px;
 }
+/* Estilos Adicionais */
+.denuncia-badge {
+  background: var(--color5);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.empresas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.empresa-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.empresa-info h3 {
+  color: var(--color4);
+  margin-bottom: 0.5rem;
+}
+
+.empresa-meta {
+  font-size: 1.2rem;
+  color: var(--color3);
+}
+
+.empresa-acoes {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #bb2d3b;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Ajustes de Espaçamento */
+.lista-empresas {
+  margin-top: 5rem;
+  padding-top: 5rem;
+  border-top: 2px solid var(--light-gray);
+}
+.tabelas-empresas {
+  margin-top: 40px;
+}
+
+.tabela-empresas {
+  margin-bottom: 30px;
+}
+
+.tabela-empresas h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+table.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+table.table th,
+table.table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+table.table tr:hover {
+  background-color: #f9f9f9;
+}

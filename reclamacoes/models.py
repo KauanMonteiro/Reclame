@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 class Empresa(models.Model):
     nome = models.CharField(max_length=50)
     cnpj = models.CharField(max_length=14, unique=True)
-
+    aprovar = models.BooleanField(default=False,blank=True, null= True)
+    rejeitar = models.BooleanField(blank=True, null= True)
     def __str__(self):
         return self.nome
 
@@ -17,6 +18,7 @@ class Reclamacao(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     denuncias_count = models.PositiveIntegerField(default=0)
+    bloquear = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.titulo} - {self.empresa.nome}"
 

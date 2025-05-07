@@ -1,6 +1,6 @@
 <article class="item-card square-card">
     <div class="item-content">
-        <h2 class="item-title">{{ empresa.nome }}</h2>
+        <h2 class="item-title">{{ empresa.nome|truncatechars:30 }}</h2>
         <div class="item-actions">
             <a href="{% url "ver_mais_empresa" empresa.id %}" class="btn btn-primary">
                 Ver Mais

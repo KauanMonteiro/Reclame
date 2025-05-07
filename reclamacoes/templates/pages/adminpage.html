@@ -1,0 +1,159 @@
+{% include "partials/head.html" %}
+
+<body>
+    <div class="container">
+        <section class="lista-reclamacoes">
+            <h1 class="titulo-pagina">Reclamações Mais Reportadas</h1>
+            <div class="reclamacoes-grid">
+                {% for reclamacao in reclamacoes_denuncias %}
+                <div class="reclamacao-card">
+                    <div class="cabecalho-reclamacao">
+                        <div class="flex-row space-between">
+                            <div class="info-reclamacao">
+                                <h2 class="titulo-reclamacao" title="{{reclamacao.titulo}}">
+                                    {{reclamacao.titulo|truncatechars:20}}
+                                </h2>
+                                <span class="empresa-nome">empresa:{{reclamacao.empresa.nome}}</span>
+                            </div>
+                            <div class="denuncia-count">
+                                {{reclamacao.denuncias_count}} denúncias
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acoes-reclamacao">
+                        <form action="{% url 'bloquear' reclamacao.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Bloquear Reclamação</button>
+                        </form>
+                        
+                    </form>
+                        <button class="btn btn-info">Ler Denúncias</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        
+        <section class="lista-empresas">
+            <h1 class="titulo-pagina">Aprovar Cadastros</h1>
+            <div class="empresas-grid">
+                {% for empresa in empresas %}
+                <div class="empresa-card">
+                    <div class="empresa-info">
+                        <h3>{{empresa.nome}}</h3>
+                        <p class="empresa-meta cnpj">CNPJ: {{empresa.cnpj}}</p>
+                    </div>
+                    <div class="empresa-acoes">
+                        <form method="POST" action="{% url 'aprovar' empresa.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Aprovar Empresa</button>
+                        </form>
+                    
+                        <form method="POST" action="{% url 'rejeitar' empresa.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary">Rejeitar</button>
+                        </form>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="lista-reclamacoes">
+            <h1 class="titulo-pagina">Reclamações Bloqueadas</h1>
+            <div class="reclamacoes-grid">
+                {% for reclamacao in reclamacoes %}
+                <div class="reclamacao-card">
+                    <div class="cabecalho-reclamacao">
+                        <div class="flex-row space-between">
+                            <div class="info-reclamacao">
+                                <h2 class="titulo-reclamacao" title="{{ reclamacao.titulo }}">
+                                    {{ reclamacao.titulo|truncatechars:20 }}
+                                </h2>
+                                <span class="empresa-nome">Empresa: {{ reclamacao.empresa.nome }}</span>
+                            </div>
+                            <div class="denuncia-count">
+                                {{ reclamacao.denuncias_count }} denúncias
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acoes-reclamacao">
+                        <form action="{% url 'desbloquear' reclamacao.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Desbloquear</button>
+                        </form>
+                        <button class="btn btn-info">Ler Denúncias</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        
+    </div>
+    <section class="tabelas-empresas">
+        <h1 class="titulo-pagina">Empresas Aprovadas e Rejeitadas</h1>
+    
+        <div class="tabela-empresas">
+            <h2>Empresas Aprovadas</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNPJ</th>
+                        <th>Ações</th> <!-- Coluna de ações -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empresa in empresas_aprovadas %}
+                    <tr>
+                        <td>{{ empresa.nome }}</td>
+                        <td>{{ empresa.cnpj }}</td>
+                        <td>
+                            <!-- Botões de Aprovar e Rejeitar -->
+                            <form method="POST" action="{% url 'rejeitar' empresa.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-secondary">Rejeitar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3">Nenhuma empresa aprovada.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="tabela-empresas">
+            <h2>Empresas Rejeitadas</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNPJ</th>
+                        <th>Ações</th> <!-- Coluna de ações -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empresa in empresas_rejeitadas %}
+                    <tr>
+                        <td>{{ empresa.nome }}</td>
+                        <td>{{ empresa.cnpj }}</td>
+                        <td>
+                            <!-- Botões de Aprovar e Rejeitar -->
+                            <form method="POST" action="{% url 'aprovar' empresa.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Aprovar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3">Nenhuma empresa rejeitada.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+</body>
+</html> 
