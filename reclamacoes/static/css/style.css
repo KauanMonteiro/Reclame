@@ -654,3 +654,91 @@ table.table th {
 table.table tr:hover {
   background-color: #f9f9f9;
 }
+.login-link {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.login-link a {
+  color: var(--color4);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: var(--color5);
+  text-decoration: underline;
+}
+
+.alert-box {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+  border: 1px solid #ffcdd2;
+}
+
+
+
+
+.btn-login {
+  color: #2e8b57;
+  border: 2px solid #2e8b57;
+  background-color: white; 
+  transition: all 0.3s ease; 
+}
+
+.btn-login:hover {
+  background:var(--color5);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-signup {
+  color: #4caf50;
+  border: 2px solid #4caf50;
+  background-color: white; 
+  transition: all 0.3s ease;
+}
+
+.btn-signup:hover {
+  background: var(--color5);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-logout {
+  color: #ff6347;
+  border: 2px solid #ff6347;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: #ff6347;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.auth-text {
+  font-size: 1.4rem;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+}
+.btn-admin {
+  color: #ffffff; 
+  border: 2px solid #ffffff;
+}
+
+.btn-admin:hover {
+  color: white;
+  transform: translateY(-1px);
+}
+
+

@@ -1,0 +1,40 @@
+{% include "partials/head.html" %}
+
+<form method="POST" action="{% url 'login' %}" class="formulario container">
+    {% csrf_token %}
+    
+    <h1 class="titulo-form">Login</h1>
+
+    {% if erro %}
+    <div class="alert-box">
+        {{ erro }}
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="username" class="form-label">Nome de Usuário</label>
+        <input type="text" 
+               name="username" 
+               id="username" 
+               class="form-input" 
+               placeholder="Digite seu usuário"
+               required>
+    </div>
+
+    <div class="form-group">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" 
+               name="password" 
+               id="password" 
+               class="form-input" 
+               placeholder="Digite sua senha"
+               required>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Entrar</button>
+        <p class="login-link">
+            Não tem conta? <a href="{% url 'registro' %}">Cadastre-se</a>
+        </p>
+    </div>
+</form>

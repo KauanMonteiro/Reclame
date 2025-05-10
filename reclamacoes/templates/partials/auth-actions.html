@@ -1,0 +1,19 @@
+{% if user.is_authenticated %}
+    {% if user.is_staff or user.is_superuser %}
+        {% if request.path != '/area_admin/' %}
+            <a href="{% url 'area_admin' %}" class="btn btn-admin">
+                <span class="auth-text">Painel Admin</span>
+            </a>
+        {% endif %}
+    {% endif %}
+    <a href="{% url 'logout' %}" class="btn btn-logout">
+        <span class="auth-text">Sair</span>
+    </a>
+{% else %}
+    <a href="{% url 'login' %}" class="btn btn-login">
+        <span class="auth-text">Acessar</span>
+    </a>
+    <a href="{% url 'registro' %}" class="btn btn-signup">
+        <span class="auth-text">Criar Conta</span>
+    </a>
+{% endif %}
