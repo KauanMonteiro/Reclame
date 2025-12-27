@@ -2,10 +2,10 @@
     <div class="item-content">
         <h2 class="item-title">{{ empresa.nome|truncatechars:30 }}</h2>
         <div class="item-actions">
-            <a href="{% url "ver_mais_empresa" empresa.id %}" class="btn btn-primary">
+            <a href="{% url "reclamacoes:ver_mais_empresa" empresa.id %}" class="btn btn-primary">
                 Ver Mais
             </a>                            
-            <a href="{% url 'criar_reclamacao' empresa.id %}" class="btn btn-primary">
+            <a href="{% url 'reclamacoes:criar_reclamacao' empresa.id %}" class="btn btn-primary">
                 Reclamar
             </a>
         </div>

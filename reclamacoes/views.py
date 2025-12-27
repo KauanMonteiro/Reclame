@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import logout as django_logout
-
+from .forms import EmpresaForm
+from django.contrib import messages
 
 def home(request):
     empresa = Empresa.objects.all().filter(aprovar=True,rejeitar = False)
@@ -20,13 +21,17 @@ def ver_mais_empresa(request,empresa_id):
 @login_required(login_url='/login/')
 def cadastrar_empresa(request):
     if request.method == 'POST':
-        nome = request.POST.get('nome')
-        cnpj = request.POST.get('cnpj')
-
-        empresa = Empresa.objects.create(nome=nome,cnpj=cnpj)
-
-        return redirect('home')
-    return render(request,'pages/cadastro_empresa.html')
+        form = EmpresaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Empresa cadastrada com sucesso! Aguarde a aprovação.')
+            return redirect('reclamacoes:home')
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+            return render(request,'pages/cadastro_empresa.html',{'form':form})
+    else:
+        form = EmpresaForm()
+    return render(request,'pages/cadastro_empresa.html',{'form':form})
 
 
 def ver_mais_reclamacao(request,reclamacao_id):
@@ -47,7 +52,7 @@ def criar_reclamacao(request, empresa_id):
             titulo=titulo,
             descricao=descricao
         )
-        return redirect('home')
+        return redirect('reclamacoes:home')
 
     return render(request, 'pages/criar_reclamacao.html', {'empresa': empresa})
 
@@ -76,7 +81,7 @@ def denunciar(request,reclamacao_id):
          )
          reclamacao.denuncias_count += 1
          reclamacao.save()
-         return redirect(home)
+         return redirect('reclamacoes:home')
 
     return render(request,'pages/denunciar.html')
 
@@ -88,7 +93,7 @@ def bloquear(request,reclamacao_id):
         reclamacao.bloquear = True
         reclamacao.save()
 
-    return redirect(area_admin)
+    return redirect('reclamacoes:area_admin')
 
 
 
@@ -99,7 +104,7 @@ def desbloquear(request,reclamacao_id):
         reclamacao.bloquear = False
         reclamacao.save()
 
-    return redirect(area_admin)
+    return redirect('reclamacoes:area_admin')
 
 
 def aprovar(request,empresa_id):
@@ -110,7 +115,7 @@ def aprovar(request,empresa_id):
         empresa.rejeitar = False
         empresa.save()
 
-    return redirect(area_admin)
+    return redirect('reclamacoes:area_admin')
 
 
 def rejeitar(request,empresa_id):
@@ -121,14 +126,11 @@ def rejeitar(request,empresa_id):
         empresa.rejeitar = True
         empresa.save()
 
-    return redirect(area_admin)
-
-
-
+    return redirect('reclamacoes:area_admin')
 
 def login_usuario(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('reclamacoes:home')
     if request.method == 'POST':
         username = request.POST.get('username')
         senha = request.POST.get('password')
@@ -137,7 +139,7 @@ def login_usuario(request):
 
         if user is not None:
             login(request, user)
-            return redirect(home) 
+            return redirect('reclamacoes:home') 
         else:
             return render(request, 'pages/login.html', {'erro': 'Usuário ou senha incorretos'})
 
@@ -145,4 +147,4 @@ def login_usuario(request):
 
 def logout(request):
     django_logout(request)
-    return redirect(home)
+    return redirect('reclamacoes:home')

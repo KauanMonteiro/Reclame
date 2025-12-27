@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="acoes-reclamacao">
-                        <form action="{% url 'bloquear' reclamacao.id %}" method="POST">
+                        <form action="{% url 'reclamacoes:bloquear' reclamacao.id %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Bloquear Reclamação</button>
                         </form>
@@ -45,12 +45,12 @@
                         <p class="empresa-meta cnpj">CNPJ: {{empresa.cnpj}}</p>
                     </div>
                     <div class="empresa-acoes">
-                        <form method="POST" action="{% url 'aprovar' empresa.id %}">
+                        <form method="POST" action="{% url 'reclamacoes:aprovar' empresa.id %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary">Aprovar Empresa</button>
                         </form>
                     
-                        <form method="POST" action="{% url 'rejeitar' empresa.id %}">
+                        <form method="POST" action="{% url 'reclamacoes:rejeitar' empresa.id %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-secondary">Rejeitar</button>
                         </form>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="acoes-reclamacao">
-                        <form action="{% url 'desbloquear' reclamacao.id %}" method="POST">
+                        <form action="{% url 'reclamacoes:desbloquear' reclamacao.id %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-success">Desbloquear</button>
                         </form>
@@ -112,7 +112,7 @@
                         <td>{{ empresa.cnpj }}</td>
                         <td>
                             <!-- Botões de Aprovar e Rejeitar -->
-                            <form method="POST" action="{% url 'rejeitar' empresa.id %}" style="display:inline;">
+                            <form method="POST" action="{% url 'reclamacoes:rejeitar' empresa.id %}" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-secondary">Rejeitar</button>
                             </form>
@@ -142,7 +142,7 @@
                         <td>{{ empresa.cnpj }}</td>
                         <td>
                             <!-- Botões de Aprovar e Rejeitar -->
-                            <form method="POST" action="{% url 'aprovar' empresa.id %}" style="display:inline;">
+                            <form method="POST" action="{% url 'reclamacoes:aprovar' empresa.id %}" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-primary">Aprovar</button>
                             </form>
