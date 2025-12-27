@@ -6,14 +6,14 @@
             </a>
         {% endif %}
     {% endif %}
-    <a href="{% url 'logout' %}" class="btn btn-logout">
+    <a href="{% url 'reclamacoes:logout' %}" class="btn btn-logout">
         <span class="auth-text">Sair</span>
     </a>
 {% else %}
-    <a href="{% url 'login' %}" class="btn btn-login">
+    <a href="{% url 'reclamacoes:login' %}" class="btn btn-login">
         <span class="auth-text">Acessar</span>
     </a>
-    <a href="{% url 'registro' %}" class="btn btn-signup">
+    <a href="{% url 'usuarios:registro' %}" class="btn btn-signup">
         <span class="auth-text">Criar Conta</span>
     </a>
 {% endif %}

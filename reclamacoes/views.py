@@ -124,21 +124,7 @@ def rejeitar(request,empresa_id):
     return redirect(area_admin)
 
 
-def cadastro_usuario(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        senha = request.POST.get('password')
 
-        if User.objects.filter(username=username).exists():
-            return render(request, 'registro.html', {'erro': 'Usuário já existe!'})
-
-        user = User.objects.create_user(username=username, password=senha, email=email)
-        user.save()
-
-        return redirect(login_usuario)
-
-    return render(request, 'pages/registro.html')
 
 def login_usuario(request):
     if request.user.is_authenticated:
