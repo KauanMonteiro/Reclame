@@ -1,31 +1,36 @@
 {% include "partials/head.html" %}
 
-<form action="{% url "criar_reclamacao" empresa.id %}" method="post" class="formulario container">
+<form action="{% url "reclamacoes:criar_reclamacao" empresa.id %}" method="POST" class="formulario container">
     {% csrf_token %}
     
     <h2>Reclamar sobre: {{ empresa.nome }}</h2>
 
-    <div class="form-group">
-        <label for="titulo" class="form-label">Título da Reclamação</label>
-        <input type="text" 
-               name="titulo" 
-               id="titulo" 
-               class="form-input" 
-               placeholder="Título da Reclamação" 
-               required>
-    </div>
+    {% if form.non_field_errors %}
+        <div class="alert-box">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
 
-    <div class="form-group">
-        <label for="descricao" class="form-label">Descrição</label>
-        <textarea name="descricao" 
-                  id="descricao" 
-                  class="form-input" 
-                  placeholder="Descreva sua reclamação" 
-                  rows="5" 
-                  required></textarea>
-    </div>
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}" class="form-label">
+                {{ field.label }}
+            </label>
+
+            {{ field }}
+
+            {% if field.errors %}
+                <div class="alert-box">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
 
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Enviar Reclamação</button>
+        <button type="submit" class="btn btn-primary">
+            Cadastrar
+        </button>
     </div>
 </form>
+{% include "partials/footer.html" %}

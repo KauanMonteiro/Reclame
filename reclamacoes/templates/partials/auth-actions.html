@@ -1,7 +1,7 @@
 {% if user.is_authenticated %}
     {% if user.is_staff or user.is_superuser %}
         {% if request.path != '/area_admin/' %}
-            <a href="{% url 'reclamacoes:area_admin' %}" class="btn btn-admin">
+            <a href="{% url 'reclamacoes:area_admin' %}" class="btn btn-login">
                 <span class="auth-text">Painel Admin</span>
             </a>
         {% endif %}
@@ -9,6 +9,9 @@
     <a href="{% url 'reclamacoes:logout' %}" class="btn btn-logout">
         <span class="auth-text">Sair</span>
     </a>
+<a href="{% url 'reclamacoes:cadastrar_empresa' %}" class="btn btn-login">
+    <span class="auth-text">Cadastrar Empresa</span>
+</a>
 {% else %}
     <a href="{% url 'reclamacoes:login' %}" class="btn btn-login">
         <span class="auth-text">Acessar</span>
@@ -16,4 +19,5 @@
     <a href="{% url 'usuarios:registro' %}" class="btn btn-signup">
         <span class="auth-text">Criar Conta</span>
     </a>
+
 {% endif %}

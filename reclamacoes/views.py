@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import logout as django_logout
-from .forms import EmpresaForm
+from .forms import EmpresaForm, ReclamacaoForm
 from django.contrib import messages
 
 def home(request):
@@ -41,20 +41,21 @@ def ver_mais_reclamacao(request,reclamacao_id):
 @login_required(login_url='/login/')
 def criar_reclamacao(request, empresa_id):
     empresa = get_object_or_404(Empresa, pk=empresa_id)
-
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        descricao = request.POST.get('descricao')
+        form = ReclamacaoForm(request.POST)
+        if form.is_valid():
+            reclamacao = form.save(commit=False)
+            reclamacao.empresa = empresa
+            reclamacao.usuario = request.user
+            reclamacao.save()
+            messages.success(request,'Reclamação realizada com sucesso!')
+        else:
+            messages.error(request,'Por favor, corrija os erros abaixo.')
+            return render(request, 'pages/criar_reclamacao.html', {'form': form, 'empresa':empresa})
+    else:
+        form =ReclamacaoForm()
 
-        Reclamacao.objects.create(
-            usuario=request.user,
-            empresa=empresa,
-            titulo=titulo,
-            descricao=descricao
-        )
-        return redirect('reclamacoes:home')
-
-    return render(request, 'pages/criar_reclamacao.html', {'empresa': empresa})
+    return render(request, 'pages/criar_reclamacao.html', {'form': form, 'empresa':empresa})
 
 @user_passes_test(lambda u: u.is_staff, login_url='/login/')
 def area_admin(request):
