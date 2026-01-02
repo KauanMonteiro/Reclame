@@ -1,30 +1,36 @@
 {% include "partials/head.html" %}
+{% include "partials/header.html" %}
+<form method="POST" class="formulario container" actions="{% url "reclamacoes:denunciar" reclamacao_id=reclamacao.id %}">
+    {% csrf_token %}
 
-<div class="formulario">
-    <form  method="POST">
-        {% csrf_token %}
-        
-        <div class="form-header">
-            <h1>Denunciar</h1>
+    <h1 class="titulo-form">Denunciar Reclamação</h1>
+
+    {% if form.non_field_errors %}
+        <div class="alert-box">
+            {{ form.non_field_errors }}
         </div>
-        
+    {% endif %}
+
+    {% for field in form %}
         <div class="form-group">
-            <label for="motivo" class="form-label">Motivo da Denúncia</label>
-            <select name="motivo" id="motivo" class="form-input">
-                <option value="SPAM">SPAM</option>
-                <option value="OFENSIVO">OFENSIVO</option>
-                <option value="FALSO">FALSO</option>
-                <option value="OUTRO">Outro motivo</option>
-            </select>
+            <label for="{{ field.id_for_label }}" class="form-label">
+                {{ field.label }}
+            </label>
+
+            {{ field }}
+
+            {% if field.errors %}
+                <div class="alert-box">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
         </div>
-        
-        <div class="form-group">
-            <label for="comentario" class="form-label">Comentário (opcional)</label>
-            <textarea name="comentario" id="comentario" class="form-input" placeholder="Descreva o motivo da denúncia, se desejar."></textarea>
-        </div>
-        
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
-    </form>
-</div>
+    {% endfor %}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Cadastrar
+        </button>
+    </div>
+</form>
+{% include "partials/footer.html" %}

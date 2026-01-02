@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import logout as django_logout
-from .forms import EmpresaForm, ReclamacaoForm
+from .forms import EmpresaForm, ReclamacaoForm,DenunciaForm
 from django.contrib import messages
 
 def home(request):
@@ -70,21 +70,21 @@ def area_admin(request):
 
 def denunciar(request,reclamacao_id):
     reclamacao = get_object_or_404(Reclamacao,pk=reclamacao_id)
-
     if request.method == "POST":
-         motivo = request.POST.get('motivo')
-         comentario= request.POST.get('comentario')
-         Denuncia.objects.create(
-             usuario = request.user,
-             reclamacao = reclamacao,
-             motivo = motivo,
-             comentario = comentario,
-         )
-         reclamacao.denuncias_count += 1
-         reclamacao.save()
-         return redirect('reclamacoes:home')
+        form = DenunciaForm(request.POST)
+        if form.is_valid():
+            denuncia = form.save(commit=False)
+            denuncia.usuario = request.user
+            denuncia.reclamacao = reclamacao
+            denuncia.save()
 
-    return render(request,'pages/denunciar.html')
+            reclamacao.denuncias_count += 1
+            reclamacao.save()
+            return redirect('reclamacoes:home')
+    else:
+        form = DenunciaForm()
+
+    return render(request,'pages/denunciar.html',{'form':form,'reclamacao':reclamacao})
 
 
 def bloquear(request,reclamacao_id):

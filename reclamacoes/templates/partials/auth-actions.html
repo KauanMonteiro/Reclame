@@ -6,9 +6,7 @@
             </a>
         {% endif %}
     {% endif %}
-    <a href="{% url 'reclamacoes:logout' %}" class="btn btn-logout">
-        <span class="auth-text">Sair</span>
-    </a>
+
 <a href="{% url 'reclamacoes:cadastrar_empresa' %}" class="btn btn-login">
     <span class="auth-text">Cadastrar Empresa</span>
 </a>
@@ -21,3 +19,6 @@
     </a>
 
 {% endif %}
+    <a href="{% url 'reclamacoes:logout' %}" class="btn btn-logout">
+        <span class="auth-text">Sair</span>
+    </a>
