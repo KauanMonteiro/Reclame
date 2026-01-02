@@ -1,6 +1,6 @@
 {% include "partials/head.html" %}
-
-<form method="POST" action="{% url 'reclamacoes:login' %}" class="formulario container">
+{% include "partials/header.html" %}
+<form method="POST" action="{% url 'usuarios:login' %}" class="formulario container">
     {% csrf_token %}
     
     <h1 class="titulo-form">Login</h1>

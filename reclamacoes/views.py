@@ -1,9 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Empresa,Reclamacao,Denuncia
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required,user_passes_test
-from django.contrib.auth import logout as django_logout
 from .forms import EmpresaForm, ReclamacaoForm,DenunciaForm
 from django.contrib import messages
 
@@ -128,24 +126,3 @@ def rejeitar(request,empresa_id):
         empresa.save()
 
     return redirect('reclamacoes:area_admin')
-
-def login_usuario(request):
-    if request.user.is_authenticated:
-        return redirect('reclamacoes:home')
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        senha = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=senha)
-
-        if user is not None:
-            login(request, user)
-            return redirect('reclamacoes:home') 
-        else:
-            return render(request, 'pages/login.html', {'erro': 'Usuário ou senha incorretos'})
-
-    return render(request, 'pages/login.html')
-
-def logout(request):
-    django_logout(request)
-    return redirect('reclamacoes:home')
