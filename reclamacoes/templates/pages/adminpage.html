@@ -28,7 +28,9 @@
                         </form>
                         
                     </form>
-                        <button class="btn btn-info">Ler Denúncias</button>
+                        <a href="{% url 'reclamacoes:ler_denuncias' reclamacao.id %}">
+                            <button class="btn btn-info">Ler Denúncias</button>
+                        </a>    
                     </div>
                 </div>
                 {% endfor %}

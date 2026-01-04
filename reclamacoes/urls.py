@@ -14,5 +14,7 @@ urlpatterns = [
     path('desbloquear/<int:reclamacao_id>/',views.desbloquear,name='desbloquear'),
     path('aprovar/<int:empresa_id>/', views.aprovar, name='aprovar'),
     path('rejeitar/<int:empresa_id>/', views.rejeitar, name='rejeitar'),
+    path('ler_denuncias/<int:reclamacao_id>/', views.ler_denuncias, name='ler_denuncias'),
+    path('delete_denuncia/<int:denuncia_id>/', views.deletar_denuncia, name='delete_denuncia'),
 
 ]

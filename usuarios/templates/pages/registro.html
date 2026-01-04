@@ -1,9 +1,10 @@
 {% include "partials/head.html" %}
 {% include "partials/header.html" %}
-<form method="POST" class="formulario container" actions="{% url "usuarios:concluir_cadastro" %}">
+<form method="POST" class="formulario container" action="{% url "usuarios:registro" %}">
     {% csrf_token %}
 
     <h1 class="titulo-form">Cadastro de Usuário</h1>
+    {% include "partials/message.html" %}
 
     {% if form.non_field_errors %}
         <div class="alert-box">

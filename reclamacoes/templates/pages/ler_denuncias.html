@@ -1,0 +1,57 @@
+{% include "partials/head.html" %}
+{% include "partials/header.html" %}
+
+<body>
+<div class="container">
+    <section class="lista-reclamacoes">
+        <h1 class="titulo-pagina">Denúncias {{ empresa.nome }}</h1>
+
+        <div class="reclamacoes-grid">
+            {% for denuncia in denuncias %}
+            <div class="reclamacao-card">
+                
+                <div class="cabecalho-reclamacao">
+                    <div class="flex-row space-between">
+                        <div class="info-reclamacao">
+                            <h2 class="titulo-reclamacao">
+                                Denúncia
+                            </h2>
+                            <span class="empresa-nome">
+                                Empresa: {{ empresa.nome }}
+                            </span>
+                        </div>
+
+                        <div class="denuncia-count">
+                            {{ forloop.counter }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="acoes-reclamacao">
+                    <p class="motivo-denuncia">
+                        <strong>{{ denuncia.get_motivo_display }}</strong>
+                    </p>
+
+                    <div class="comentario-denuncia">
+                        {{ denuncia.comentario|linebreaksbr }}
+                    </div>
+
+                    <!-- BOTÃO DE DELETAR -->
+                    <form method="post"
+                          action="{% url 'reclamacoes:delete_denuncia' denuncia.id %}"
+                          onsubmit="return confirm('Tem certeza que deseja excluir esta denúncia?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-deletar">
+                            Deletar denúncia
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+            {% empty %}
+                <p>Nenhuma denúncia encontrada.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+</body>

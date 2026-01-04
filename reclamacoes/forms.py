@@ -7,9 +7,17 @@ class EmpresaForm(forms.ModelForm):
         fields = ['nome', 'cnpj']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-input'}),
-            'cnpj': forms.TextInput(attrs={'class': 'form-input'}),
+            'cnpj': forms.TextInput(attrs={'class': 'form-input', 'inputmode': 'numeric','maxlength': '14','placeholder': 'Digite apenas números'}),
         }
 
+    def clean_cnpj(self):
+        cnpj = self.cleaned_data.get('cnpj')
+        if not cnpj.isdigit():
+            raise forms.ValidationError("O CNPJ deve conter apenas números.")
+        if len(cnpj) != 14:
+            raise forms.ValidationError("O CNPJ deve conter exatamente 14 números.")
+        return cnpj
+    
 class ReclamacaoForm(forms.ModelForm):
     class Meta():
         model = Reclamacao

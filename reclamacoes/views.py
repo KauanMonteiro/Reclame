@@ -126,3 +126,20 @@ def rejeitar(request,empresa_id):
         empresa.save()
 
     return redirect('reclamacoes:area_admin')
+
+def ler_denuncias(request, reclamacao_id):
+    denuncias = Denuncia.objects.all().order_by('-criado_em')
+    reclamacao = get_object_or_404(Reclamacao,pk=reclamacao_id)
+    empresa = get_object_or_404(Empresa,pk=reclamacao.empresa.id)
+    return render(request,'pages/ler_denuncias.html',{'denuncias':denuncias,'reclamacao':reclamacao,'empresa':empresa})
+
+def deletar_denuncia(request, denuncia_id):
+    denuncia = get_object_or_404(Denuncia,pk=denuncia_id)
+    reclamacao = get_object_or_404(Reclamacao,pk=denuncia.reclamacao.id)
+
+    if request.method=='POST':
+        reclamacao.denuncias_count -= 1
+        reclamacao.save()
+        denuncia.delete()
+
+    return redirect('reclamacoes:ler_denuncias', reclamacao.id)
